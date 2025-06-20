@@ -12,7 +12,11 @@ staging_dir = args.staging
 
 if not os.path.isdir(source_dir):
     raise SystemExit(f'Source directory {source_dir} does not exist.')
-if not os.path.isdir(staging_dir):
+
+if os.path.exists(staging_dir):
+    if not os.path.isdir(staging_dir):
+        raise SystemExit(f'Staging path {staging_dir} exists and is not a directory.')
+else:
     os.makedirs(staging_dir, exist_ok=True)
 
 for filename in os.listdir(source_dir):
